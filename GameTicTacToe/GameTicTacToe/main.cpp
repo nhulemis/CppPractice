@@ -6,6 +6,7 @@ using namespace std;
 #pragma region declare function
 void DrawMatrix();
 void Matrix_Key_Press(int &X, int &Y, bool &player, int matrix[3][3], bool &press);
+int CheckWin(int matrix[3][3], bool player);
 #pragma endregion
 
 int main() {
@@ -121,5 +122,61 @@ void Matrix_Key_Press(int &X, int &Y, bool &player, int matrix[3][3], bool &pres
 		player = !player;
 	}
 
+}
+
+/**
+* return 1 da co nguoi chien thang
+* return 0 chua co nguoi chien thang
+*/
+int CheckWin(int matrix[3][3], bool player) {
+	int check = 1;
+
+	if (player)
+	{
+		check = 0;
+	}
+
+	// check hang doc
+	for (int i = 0; i < 3; i++)
+	{
+		//int x = matrix[i][0];
+		if (matrix[i][0] == check && matrix[i][1] == check && matrix[i][2] == check)
+		{
+			COORD alert = { 20,20 };
+			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), alert);
+			cout << "Chien thang";
+			return 1;
+		}
+	}
+
+	// check hang ngan
+	for (int i = 0; i < 3; i++)
+	{
+		//int x = matrix[i][0];
+		if (matrix[0][i] == check && matrix[1][i] == check && matrix[2][i] == check)
+		{
+			COORD alert = { 20,20 };
+			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), alert);
+			cout << "Chien thang";
+			return 1;
+		}
+	}
+
+
+	if (matrix[1][1] == 0 || matrix[1][1] == 1)
+	{
+		check = matrix[1][1];
+	}
+
+	// check hang cheo
+	if ((matrix[0][0] == check && matrix[2][2] == check) || (matrix[2][0] == check && matrix[0][2] == check))
+	{
+		COORD alert = { 20,20 };
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), alert);
+		cout << "Chien thang";
+		return 1;
+	}
+
+	return 0;
 }
 #pragma endregion
