@@ -7,6 +7,8 @@ using namespace std;
 void DrawMatrix();
 void Matrix_Key_Press(int &X, int &Y, bool &player, int matrix[3][3], bool &press);
 int CheckWin(int matrix[3][3], bool player);
+void SetUpAndPlayChess();
+
 #pragma endregion
 
 int main() {
@@ -178,5 +180,32 @@ int CheckWin(int matrix[3][3], bool player) {
 	}
 
 	return 0;
+}
+
+void SetUpAndPlayChess() {
+	int X = 5;
+	int Y = 10;
+	bool player = false; // false is player1 (O) value = 1 , true player2 (X) value = 0 =))))
+	bool press = false;
+	int matrix[3][3];
+
+	DrawMatrix();
+	COORD cur = { X,Y };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cur);
+	while (1)
+	{
+		Matrix_Key_Press(X, Y, player, matrix, press);
+		if (press)
+		{
+			//	cout << matrix[X / 9][Y / 4];
+
+			if (CheckWin(matrix, !player) == 1) {
+				break;
+			}
+			press = false;
+		}
+
+		Sleep(220);
+	}
 }
 #pragma endregion
