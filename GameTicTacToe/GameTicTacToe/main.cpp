@@ -12,7 +12,7 @@ void SetUpAndPlayChess();
 #pragma endregion
 
 int main() {
-
+	SetUpAndPlayChess();
 
 	getchar();
 	return 0;
