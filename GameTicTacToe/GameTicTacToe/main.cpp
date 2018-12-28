@@ -18,7 +18,7 @@ void Winner(int player);
 int Enter_listener();
 void SetMatrix();
 void GoToXY(int x, int y);
-bool CheckOverRide(int matrix[3][3],int x,int y);
+bool CheckOverRide(int matrix[3][3], int x, int y);
 #pragma endregion
 
 int main() {
@@ -28,7 +28,7 @@ int main() {
 	if (sc == 1)
 	{
 		InputName();
-	///	fflush(stdin);
+		///	fflush(stdin);
 		GetAsyncKeyState(VK_SPACE);
 		int replay;
 		do
@@ -62,7 +62,7 @@ int main() {
 */
 bool CheckOverRide(int matrix[3][3], int x, int y) {
 
-	if (matrix[x/9][y/4] == 1 || matrix[x/9][y/4] == 0)
+	if (matrix[x / 9][y / 4] == 1 || matrix[x / 9][y / 4] == 0)
 	{
 		return false;
 	}
@@ -130,17 +130,11 @@ int Enter_listener() {
 	}
 }
 
-void SetMatrix()
-{
-}
 
 void InputName() {
-
 	cin.ignore();
 	cout << "player 1 : ";
 	cin.getline(player1, 20, '\n');
-
-
 	cout << "player 2 : ";
 	cin.getline(player2, 20, '\n');
 	fflush(stdin);
@@ -156,11 +150,11 @@ void ShowMenu() {
 
 }
 
-// ham va ban co
+/*function draw matrix ^^
+*/
 void DrawMatrix() {
 	// clear console
 	system("cls");
-
 	for (int i = 0; i < 13; i++)
 	{
 		if (i % 4 == 0)
@@ -198,16 +192,13 @@ void DrawMatrix() {
 	cout << "\n\n\t" << "\t(O)" << player1 << endl;
 	cout << "\t" << "\t(X)" << player2 << endl;
 
-
 	// tutorial
 	cout << "\nUse keys (UP DOWN LEFT RIGHT) for move cursor \nuse ENTER for play";
 	SwitchPlayer(false);
 }
 
-//dieu khien con tro va choi co
+/*dieu khien con tro va choi co*/
 void MatrixKeyPress(int &X, int &Y, bool &player, int matrix[3][3], bool &press) {
-	COORD cursor;
-
 
 	if (GetAsyncKeyState(VK_UP))
 	{
@@ -216,7 +207,6 @@ void MatrixKeyPress(int &X, int &Y, bool &player, int matrix[3][3], bool &press)
 			Y -= 4;
 			GoToXY(X, Y);
 		}
-
 	}
 	else if (GetAsyncKeyState(VK_DOWN))
 	{
@@ -225,7 +215,6 @@ void MatrixKeyPress(int &X, int &Y, bool &player, int matrix[3][3], bool &press)
 			Y += 4;
 			GoToXY(X, Y);
 		}
-
 	}
 	else if (GetAsyncKeyState(VK_LEFT))
 	{
@@ -234,21 +223,18 @@ void MatrixKeyPress(int &X, int &Y, bool &player, int matrix[3][3], bool &press)
 			X -= 10;
 			GoToXY(X, Y);
 		}
-
 	}
 	else if (GetAsyncKeyState(VK_RIGHT))
 	{
-
 		if (X <= 15)
 		{
 			X += 10;
 			GoToXY(X, Y);
 		}
-
 	}
 	else if (GetAsyncKeyState(VK_SPACE))
 	{
-		if (CheckOverRide(matrix,X,Y))
+		if (CheckOverRide(matrix, X, Y))
 		{
 			turns++;
 			int yy = Y;
@@ -273,9 +259,7 @@ void MatrixKeyPress(int &X, int &Y, bool &player, int matrix[3][3], bool &press)
 		{
 			return;
 		}
-		
 	}
-
 }
 
 void SwitchPlayer(bool player) {
@@ -296,7 +280,6 @@ void SwitchPlayer(bool player) {
 	}
 }
 
-
 /**
 * return 1 da co nguoi chien thang
 * return 0 chua co nguoi chien thang
@@ -308,7 +291,6 @@ int CheckWin(int matrix[3][3], bool player) {
 	{
 		check = 0;
 	}
-
 	// check hang doc
 	for (int i = 0; i < 3; i++)
 	{
@@ -316,11 +298,9 @@ int CheckWin(int matrix[3][3], bool player) {
 		if (matrix[i][0] == check && matrix[i][1] == check && matrix[i][2] == check)
 		{
 			Winner(check);
-
 			return 1;
 		}
 	}
-
 	// check hang ngan
 	for (int i = 0; i < 3; i++)
 	{
@@ -328,7 +308,6 @@ int CheckWin(int matrix[3][3], bool player) {
 		if (matrix[0][i] == check && matrix[1][i] == check && matrix[2][i] == check)
 		{
 			Winner(check);
-
 			return 1;
 		}
 	}
@@ -343,7 +322,6 @@ int CheckWin(int matrix[3][3], bool player) {
 	if ((matrix[0][0] == check && matrix[2][2] == check) || (matrix[2][0] == check && matrix[0][2] == check))
 	{
 		Winner(check);
-
 		return 1;
 	}
 
@@ -385,7 +363,7 @@ void SetUpAndPlayChess() {
 	Sleep(1000);
 	while (1)
 	{
-		
+
 		if (press)
 		{
 			//	cout << matrix[X / 9][Y / 4];
