@@ -301,7 +301,7 @@ int CheckWin(int matrix[3][3], bool player) {
 			return 1;
 		}
 	}
-	// check hang ngan
+	// check hang ngang
 	for (int i = 0; i < 3; i++)
 	{
 		//int x = matrix[i][0];
@@ -312,18 +312,18 @@ int CheckWin(int matrix[3][3], bool player) {
 		}
 	}
 
-
-	if (matrix[1][1] == 0 || matrix[1][1] == 1)
-	{
-		check = matrix[1][1];
-	}
-
 	// check hang cheo
-	if ((matrix[0][0] == check && matrix[2][2] == check) || (matrix[2][0] == check && matrix[0][2] == check))
+	if (matrix[1][1] == check)
 	{
-		Winner(check);
-		return 1;
+		if ((matrix[0][0] == check && matrix[2][2] == check) || (matrix[2][0] == check && matrix[0][2] == check))
+		{
+			Winner(check);
+			return 1;
+		}
 	}
+
+	
+	
 
 	//kiem tra hoa
 	if (turns == 9)
