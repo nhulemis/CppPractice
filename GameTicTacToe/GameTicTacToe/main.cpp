@@ -18,6 +18,7 @@ void Winner(int player);
 int Enter_listener();
 void SetMatrix();
 void GoToXY(int x, int y);
+bool CheckOverRide(int matrix[3][3],int x,int y);
 #pragma endregion
 
 int main() {
@@ -56,6 +57,17 @@ int main() {
 }
 
 #pragma region function
+
+/* return true --- allow play at this index
+*/
+bool CheckOverRide(int matrix[3][3], int x, int y) {
+
+	if (matrix[x/9][y/4] == 1 || matrix[x/9][y/4] == 0)
+	{
+		return false;
+	}
+	return true;
+}
 
 void GoToXY(int x, int y) {
 	COORD cursor;
@@ -236,26 +248,32 @@ void MatrixKeyPress(int &X, int &Y, bool &player, int matrix[3][3], bool &press)
 	}
 	else if (GetAsyncKeyState(VK_SPACE))
 	{
-		turns++;
-		int yy = Y;
-		int xx = X;
-		if (player)
+		if (CheckOverRide(matrix,X,Y))
 		{
-			cout << "X ";
-			matrix[X / 9][Y / 4] = 0;
-
+			turns++;
+			int yy = Y;
+			int xx = X;
+			if (player)
+			{
+				cout << "X ";
+				matrix[X / 9][Y / 4] = 0;
+			}
+			else
+			{
+				//cout << "O";
+				cout << "O ";
+				matrix[X / 9][Y / 4] = 1;
+			}
+			press = true;
+			player = !player;
+			SwitchPlayer(player);
+			GoToXY(xx, yy);
 		}
 		else
 		{
-			//cout << "O";
-			cout << "O ";
-			matrix[X / 9][Y / 4] = 1;
-
+			return;
 		}
-		press = true;
-		player = !player;
-		SwitchPlayer(player);
-		GoToXY(xx, yy);
+		
 	}
 
 }
