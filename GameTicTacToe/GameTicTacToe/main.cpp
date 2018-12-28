@@ -17,6 +17,7 @@ void SwitchPlayer(bool player);
 void Winner(int player);
 int Enter_listener();
 void SetMatrix();
+void GoToXY(int x, int y);
 #pragma endregion
 
 int main() {
@@ -56,6 +57,13 @@ int main() {
 
 #pragma region function
 
+void GoToXY(int x, int y) {
+	COORD cursor;
+	cursor.X = x;
+	cursor.Y = y;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
+}
+
 void SetMatrix(int matrix[3][3]) {
 	for (int i = 0; i < 3; i++)
 	{
@@ -72,9 +80,7 @@ int Enter_listener() {
 
 	COORD cursor;
 
-	cursor.X = X;
-	cursor.Y = Y;
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
+	GoToXY(X, Y);
 
 	while (1)
 	{
@@ -83,9 +89,7 @@ int Enter_listener() {
 			if (Y == 12)
 			{
 				Y -= 1;
-				cursor.X = X;
-				cursor.Y = Y;
-				SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
+				GoToXY(X, Y);
 			}
 
 		}
@@ -94,9 +98,7 @@ int Enter_listener() {
 			if (Y == 11)
 			{
 				Y += 1;
-				cursor.X = X;
-				cursor.Y = Y;
-				SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
+				GoToXY(X, Y);
 			}
 
 		}
@@ -200,9 +202,7 @@ void MatrixKeyPress(int &X, int &Y, bool &player, int matrix[3][3], bool &press)
 		if (Y > 2)
 		{
 			Y -= 4;
-			cursor.X = X;
-			cursor.Y = Y;
-			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
+			GoToXY(X, Y);
 		}
 
 	}
@@ -211,9 +211,7 @@ void MatrixKeyPress(int &X, int &Y, bool &player, int matrix[3][3], bool &press)
 		if (Y <= 6)
 		{
 			Y += 4;
-			cursor.X = X;
-			cursor.Y = Y;
-			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
+			GoToXY(X, Y);
 		}
 
 	}
@@ -222,9 +220,7 @@ void MatrixKeyPress(int &X, int &Y, bool &player, int matrix[3][3], bool &press)
 		if (X > 5)
 		{
 			X -= 10;
-			cursor.X = X;
-			cursor.Y = Y;
-			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
+			GoToXY(X, Y);
 		}
 
 	}
@@ -234,9 +230,7 @@ void MatrixKeyPress(int &X, int &Y, bool &player, int matrix[3][3], bool &press)
 		if (X <= 15)
 		{
 			X += 10;
-			cursor.X = X;
-			cursor.Y = Y;
-			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
+			GoToXY(X, Y);
 		}
 
 	}
@@ -261,9 +255,7 @@ void MatrixKeyPress(int &X, int &Y, bool &player, int matrix[3][3], bool &press)
 		press = true;
 		player = !player;
 		SwitchPlayer(player);
-		cursor.X = xx;
-		cursor.Y = yy;
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
+		GoToXY(xx, yy);
 	}
 
 }
@@ -272,25 +264,17 @@ void SwitchPlayer(bool player) {
 	COORD index;
 	if (player)
 	{
-		index.X = 5;
-		index.Y = 15;
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), index);
+		GoToXY(5, 15);
 		cout << "  ";
-		index.X = 5;
-		index.Y = 16;
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), index);
+		GoToXY(5, 16);
 		cout << "->";
 	}
 	else
 	{
-		index.X = 5;
-		index.Y = 16;
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), index);
-		cout << "  ";
-		index.X = 5;
-		index.Y = 15;
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), index);
+		GoToXY(5, 15);
 		cout << "->";
+		GoToXY(5, 16);
+		cout << "  ";
 	}
 }
 
@@ -348,8 +332,7 @@ int CheckWin(int matrix[3][3], bool player) {
 	//kiem tra hoa
 	if (turns == 9)
 	{
-		COORD alert = { 50,8 };
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), alert);
+		GoToXY(50, 8);
 		cout << "choi hay qua hoa roi " << endl;
 		cout << "\t\t\t\t\t";
 		return 1;
@@ -358,8 +341,7 @@ int CheckWin(int matrix[3][3], bool player) {
 }
 
 void Winner(int player) {
-	COORD alert = { 50,8 };
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), alert);
+	GoToXY(50, 8);
 	if (player == 1)
 	{
 		cout << player1 << " WIN \n\n";
@@ -381,8 +363,7 @@ void SetUpAndPlayChess() {
 	turns = 0;
 	SetMatrix(matrix);
 	DrawMatrix();
-	COORD cur = { X,Y };
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cur);
+	GoToXY(X, Y);
 	Sleep(1000);
 	while (1)
 	{
