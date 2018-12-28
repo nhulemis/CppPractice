@@ -16,6 +16,7 @@ void InputName();
 void SwitchPlayer(bool player);
 void Winner(int player);
 int Enter_listener();
+void SetMatrix();
 #pragma endregion
 
 int main() {
@@ -53,6 +54,8 @@ int main() {
 
 #pragma region function
 
+
+
 int Enter_listener() {
 	int X = 40;
 	int Y = 11;
@@ -89,13 +92,22 @@ int Enter_listener() {
 		}
 		else if (GetAsyncKeyState(VK_RETURN) & 0x8000)
 		{
+			cout << "\n\t\t\t\t\t\t";
 			if (Y == 12)
 			{
-
+				return 0;
+			}
+			else
+			{
+				return 1;
 			}
 		}
 		
 	}
+}
+
+void SetMatrix()
+{
 }
 
 void InputName() {
