@@ -54,7 +54,15 @@ int main() {
 
 #pragma region function
 
-
+void SetMatrix(int matrix[3][3]) {
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			matrix[i][j] = 100000;
+		}
+	}
+}
 
 int Enter_listener() {
 	int X = 40;
@@ -362,7 +370,8 @@ void SetUpAndPlayChess() {
 	bool player = false; // false is player1 (O) value = 1 , true player2 (X) value = 0 =))))
 	bool press = false;
 	int matrix[3][3];
-
+	turns = 0;
+	SetMatrix(matrix);
 	DrawMatrix();
 	COORD cur = { X,Y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cur);
