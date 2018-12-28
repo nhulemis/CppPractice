@@ -119,10 +119,15 @@ void SetMatrix()
 }
 
 void InputName() {
+	fflush(stdin);
+	fflush(stdin);
+	cin.ignore();
 	cout << "player 1 : ";
-	cin >> player1;
+	cin.getline(player1, 20, '\n');
+	fflush(stdin);
+	fflush(stdin);
 	cout << "player 2 : ";
-	cin >> player2;
+	cin.getline(player2, 20, '\n');
 
 }
 
