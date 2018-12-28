@@ -4,24 +4,122 @@
 
 using namespace std;
 #pragma region declare function
+char player1[20];
+int turns = 0;
+char player2[20];
 void DrawMatrix();
-void Matrix_Key_Press(int &X, int &Y, bool &player, int matrix[3][3], bool &press);
+void MatrixKeyPress(int &X, int &Y, bool &player, int matrix[3][3], bool &press);
 int CheckWin(int matrix[3][3], bool player);
 void SetUpAndPlayChess();
-
+void ShowMenu();
+void InputName();
+void SwitchPlayer(bool player);
+void Winner(int player);
+int Enter_listener();
 #pragma endregion
 
 int main() {
-	SetUpAndPlayChess();
+	int sc = 0;
+	ShowMenu();
+	cin >> sc;
+	if (sc == 1)
+	{
+		InputName();
+		int replay;
 
-	getchar();
+		do
+		{
+			SetUpAndPlayChess();
+			////Sleep(500);
+			//fflush(stdin);
+			//fflush(stdin);
+			cout << "choi lai Y/N ?\n";
+			cout << "\t\t\t\t\tYes" << endl;
+			cout << "\t\t\t\t\tNo" << endl;
+			replay = Enter_listener();
+			//replay = 0;
+		} while (replay == 1);
+	}
+	else
+	{
+		exit;
+	}
+
+	//SetUpAndPlayChess();
+	system("pause");
+
 	return 0;
 }
 
 #pragma region function
 
+int Enter_listener() {
+	int X = 40;
+	int Y = 11;
+
+	COORD cursor;
+
+	cursor.X = X;
+	cursor.Y = Y;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
+
+	while (1)
+	{
+		if (GetAsyncKeyState(VK_UP))
+		{
+			if (Y == 12)
+			{
+				Y -= 1;
+				cursor.X = X;
+				cursor.Y = Y;
+				SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
+			}
+
+		}
+		else if (GetAsyncKeyState(VK_DOWN))
+		{
+			if (Y == 11)
+			{
+				Y += 1;
+				cursor.X = X;
+				cursor.Y = Y;
+				SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
+			}
+
+		}
+		else if (GetAsyncKeyState(VK_RETURN) & 0x8000)
+		{
+			if (Y == 12)
+			{
+
+			}
+		}
+		
+	}
+}
+
+void InputName() {
+	cout << "player 1 : ";
+	cin >> player1;
+	cout << "player 2 : ";
+	cin >> player2;
+
+}
+
+void ShowMenu() {
+	cout << "______________Wellcome to TIC-TAC-TOE Game!_______________" << endl;
+
+	cout << "if you find any problem, please contact nhulemis@gmail.com" << endl << endl << endl;
+
+	cout << "Select your mode (1 -play game Player vs Player, OTHERs - EXIT GAME) " << endl;
+
+}
+
 // ham va ban co
 void DrawMatrix() {
+	// clear console
+	system("cls");
+
 	for (int i = 0; i < 13; i++)
 	{
 		if (i % 4 == 0)
@@ -55,11 +153,19 @@ void DrawMatrix() {
 		}
 		cout << endl;
 	}
+	cout << "\n\n\t" << player1 << endl;
+	cout << "\t" << player2 << endl;
+
+
+	// tutorial
+	cout << "\nUse keys (UP DOWN LEFT RIGHT) for move cursor and use SPACE for play";
+	SwitchPlayer(false);
 }
 
 //dieu khien con tro va choi co
-void Matrix_Key_Press(int &X, int &Y, bool &player, int matrix[3][3], bool &press) {
+void MatrixKeyPress(int &X, int &Y, bool &player, int matrix[3][3], bool &press) {
 	COORD cursor;
+
 
 	if (GetAsyncKeyState(VK_UP))
 	{
@@ -108,23 +214,58 @@ void Matrix_Key_Press(int &X, int &Y, bool &player, int matrix[3][3], bool &pres
 	}
 	else if (GetAsyncKeyState(VK_SPACE))
 	{
-
+		turns++;
+		int yy = Y;
+		int xx = X;
 		if (player)
 		{
 			cout << "X ";
 			matrix[X / 9][Y / 4] = 0;
+
 		}
 		else
 		{
 			//cout << "O";
 			cout << "O ";
 			matrix[X / 9][Y / 4] = 1;
+
 		}
 		press = true;
 		player = !player;
+		SwitchPlayer(player);
+		cursor.X = xx;
+		cursor.Y = yy;
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
 	}
 
 }
+
+void SwitchPlayer(bool player) {
+	COORD index;
+	if (player)
+	{
+		index.X = 5;
+		index.Y = 15;
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), index);
+		cout << "  ";
+		index.X = 5;
+		index.Y = 16;
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), index);
+		cout << "->";
+	}
+	else
+	{
+		index.X = 5;
+		index.Y = 16;
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), index);
+		cout << "  ";
+		index.X = 5;
+		index.Y = 15;
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), index);
+		cout << "->";
+	}
+}
+
 
 /**
 * return 1 da co nguoi chien thang
@@ -144,9 +285,8 @@ int CheckWin(int matrix[3][3], bool player) {
 		//int x = matrix[i][0];
 		if (matrix[i][0] == check && matrix[i][1] == check && matrix[i][2] == check)
 		{
-			COORD alert = { 20,20 };
-			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), alert);
-			cout << "Chien thang";
+			Winner(check);
+
 			return 1;
 		}
 	}
@@ -157,9 +297,8 @@ int CheckWin(int matrix[3][3], bool player) {
 		//int x = matrix[i][0];
 		if (matrix[0][i] == check && matrix[1][i] == check && matrix[2][i] == check)
 		{
-			COORD alert = { 20,20 };
-			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), alert);
-			cout << "Chien thang";
+			Winner(check);
+
 			return 1;
 		}
 	}
@@ -173,13 +312,36 @@ int CheckWin(int matrix[3][3], bool player) {
 	// check hang cheo
 	if ((matrix[0][0] == check && matrix[2][2] == check) || (matrix[2][0] == check && matrix[0][2] == check))
 	{
-		COORD alert = { 20,20 };
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), alert);
-		cout << "Chien thang";
+		Winner(check);
+
 		return 1;
 	}
 
+	//kiem tra hoa
+	if (turns == 9)
+	{
+		COORD alert = { 50,8 };
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), alert);
+		cout << "choi hay qua hoa roi " << endl;
+		cout << "\t\t\t\t\t";
+		return 1;
+	}
 	return 0;
+}
+
+void Winner(int player) {
+	COORD alert = { 50,8 };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), alert);
+	if (player == 1)
+	{
+		cout << player1 << " WIN \n\n";
+		cout << "\t\t\t\t\t";
+	}
+	else
+	{
+		cout << player2 << " WIN \n\n";
+		cout << "\t\t\t\t\t";
+	}
 }
 
 void SetUpAndPlayChess() {
@@ -194,7 +356,7 @@ void SetUpAndPlayChess() {
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cur);
 	while (1)
 	{
-		Matrix_Key_Press(X, Y, player, matrix, press);
+		MatrixKeyPress(X, Y, player, matrix, press);
 		if (press)
 		{
 			//	cout << matrix[X / 9][Y / 4];
