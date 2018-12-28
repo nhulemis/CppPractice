@@ -26,8 +26,9 @@ int main() {
 	if (sc == 1)
 	{
 		InputName();
+	///	fflush(stdin);
+		GetAsyncKeyState(VK_SPACE);
 		int replay;
-
 		do
 		{
 			SetUpAndPlayChess();
@@ -40,6 +41,7 @@ int main() {
 			replay = Enter_listener();
 			//replay = 0;
 		} while (replay == 1);
+		exit;
 	}
 	else
 	{
@@ -110,7 +112,7 @@ int Enter_listener() {
 				return 1;
 			}
 		}
-		
+
 	}
 }
 
@@ -119,16 +121,16 @@ void SetMatrix()
 }
 
 void InputName() {
-	fflush(stdin);
-	fflush(stdin);
+
 	cin.ignore();
 	cout << "player 1 : ";
 	cin.getline(player1, 20, '\n');
-	fflush(stdin);
-	fflush(stdin);
+
+
 	cout << "player 2 : ";
 	cin.getline(player2, 20, '\n');
-
+	fflush(stdin);
+	return;
 }
 
 void ShowMenu() {
@@ -149,7 +151,7 @@ void DrawMatrix() {
 	{
 		if (i % 4 == 0)
 		{
-			for (int j = 0; j < 10; j++)
+			/*for (int j = 0; j < 10; j++)
 			{
 				if (i != 0 && j % 3 == 0)
 				{
@@ -160,7 +162,8 @@ void DrawMatrix() {
 					break;
 				}
 				cout << "___";
-			}
+			}*/
+			cout << "_______________________________";
 		}
 		else
 		{
@@ -178,12 +181,12 @@ void DrawMatrix() {
 		}
 		cout << endl;
 	}
-	cout << "\n\n\t" << player1 << endl;
-	cout << "\t" << player2 << endl;
+	cout << "\n\n\t" << "\t(O)" << player1 << endl;
+	cout << "\t" << "\t(X)" << player2 << endl;
 
 
 	// tutorial
-	cout << "\nUse keys (UP DOWN LEFT RIGHT) for move cursor and use SPACE for play";
+	cout << "\nUse keys (UP DOWN LEFT RIGHT) for move cursor \nuse ENTER for play";
 	SwitchPlayer(false);
 }
 
@@ -380,9 +383,10 @@ void SetUpAndPlayChess() {
 	DrawMatrix();
 	COORD cur = { X,Y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cur);
+	Sleep(1000);
 	while (1)
 	{
-		MatrixKeyPress(X, Y, player, matrix, press);
+		
 		if (press)
 		{
 			//	cout << matrix[X / 9][Y / 4];
@@ -393,7 +397,8 @@ void SetUpAndPlayChess() {
 			press = false;
 		}
 
-		Sleep(220);
+		Sleep(300);
+		MatrixKeyPress(X, Y, player, matrix, press);
 	}
 }
 #pragma endregion
