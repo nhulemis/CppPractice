@@ -43,7 +43,7 @@ int main() {
 			replay = Enter_listener();
 			//replay = 0;
 		} while (replay == 1);
-		exit;
+		
 	}
 	else
 	{
