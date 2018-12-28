@@ -43,7 +43,7 @@ int main() {
 			replay = Enter_listener();
 			//replay = 0;
 		} while (replay == 1);
-		
+
 	}
 	else
 	{
@@ -155,23 +155,12 @@ void ShowMenu() {
 void DrawMatrix() {
 	// clear console
 	system("cls");
-	for (int i = 0; i < 13; i++)
+	cout << " _____________________________\n";
+	for (int i = 1; i < 13; i++)
 	{
-		if (i % 4 == 0)
-		{
-			/*for (int j = 0; j < 10; j++)
-			{
-				if (i != 0 && j % 3 == 0)
-				{
-					cout << "|";
-				}
-				if (j == 9 && i != 0)
-				{
-					break;
-				}
-				cout << "___";
-			}*/
-			cout << "_______________________________";
+		if (i % 4 == 0 )
+		{			
+			cout << "|_________|_________|_________|";
 		}
 		else
 		{
@@ -267,16 +256,16 @@ void SwitchPlayer(bool player) {
 	if (player)
 	{
 		GoToXY(5, 15);
-		cout << "  ";
+		cout << "    ";
 		GoToXY(5, 16);
-		cout << "->";
+		cout << "->>>";
 	}
 	else
 	{
 		GoToXY(5, 15);
-		cout << "->";
+		cout << "->>>";
 		GoToXY(5, 16);
-		cout << "  ";
+		cout << "    ";
 	}
 }
 
@@ -322,8 +311,8 @@ int CheckWin(int matrix[3][3], bool player) {
 		}
 	}
 
-	
-	
+
+
 
 	//kiem tra hoa
 	if (turns == 9)
