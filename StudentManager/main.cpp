@@ -2,6 +2,7 @@
 #include <string>
 #include <list>
 #include <fstream>
+#include<Windows.h>
 using namespace std;
 #pragma region Struct
 struct Student
@@ -13,18 +14,18 @@ struct Student
 
 #pragma endregion
 
-#pragma region declare function and properties
-
+#pragma region declare function
 
 void InsertStudent(int id, string name, float score, list<Student> *students);
 void InsertStudent(Student s, list<Student> *students);
 bool CheckExists(int id, list<Student> students);
 void RangeScore(list<Student> *students);
 bool Compare(const Student &a, const Student &b);
-void OpenFileWrite(ofstream &of, list<Student> students);
+void OpenFileWrite(string name, ofstream &of, list<Student> students);
 void OpenFileRead(ifstream &fin, list<Student>* fileReads);
 void OutputData(list<Student> students);
-
+void ShowMenu();
+void InputStudent(list<Student> *students);
 #pragma endregion
 
 
@@ -33,36 +34,91 @@ void OutputData(list<Student> students);
 int main() {
 
 	list<Student> students;
-	Student s;
-	s._id = 1;
-	s._name = "abc haha";
-	s._score = 7.5;
-	InsertStudent(s, &students);
+	//Student s;
+	//s._id = 1;
+	//s._name = "abc haha";
+	//s._score = 7.5;
+	//InsertStudent(s, &students);
 	InsertStudent(2, "xyz tao lao", 8, &students);
 	InsertStudent(3, "obc thien dia", 7, &students);
 	InsertStudent(4, "met roi nghe", 7.2, &students);
 	InsertStudent(5, "hihi abc xyz", 7.3, &students);
+	system("cls");
+	//RangeScore(&students);
 
-	RangeScore(&students);
 
+	//// open file and write
+	//ofstream of;
+	//OpenFileWrite(of, students);
 
-	// open file and write
-	ofstream of;
-	OpenFileWrite(of, students);
+	//of.close();
+	////	OutputData(students);
 
-	//	OutputData(students);
+	//	// open and read
+	//ifstream fin;
+	//list<Student> fileReads;
+	//OpenFileRead(fin, &fileReads);
 
-		// open and read
-	ifstream fin;
-	list<Student> fileReads;
-	OpenFileRead(fin, &fileReads);
+	//// output file readed on console
+	//OutputData(fileReads);
+	//fin.close();
+	int sc;
+	do
+	{
+		//
+		ShowMenu();
+		cout << "your choose : ";
+		cin >> sc;
+		switch (sc)
+		{
+		case 1: 
+			InputStudent(&students);
+			cout << "\n\n";
+			break;
+		case 2:
+			OutputData(students);
+			cout << "\n\n\n\n";
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		default:
+			sc = 0;
+			break;
+		}
+	} while (sc != 0);
 
-	OutputData(fileReads);
-
-	of.close();
 	system("pause");
 	return 0;
 }
+
+void InputStudent(list<Student> *students) {
+	int id;
+	string name;
+	float score;
+	cout << "ID : ";
+	cin >> id;
+	cin.ignore();
+	cout << "Name : ";
+	getline(cin, name);
+	fflush(stdin);
+	//cin.ignore();
+	cout << "Score : ";
+	cin >> score;
+	InsertStudent(id, name, score, students);
+}
+
+void ShowMenu() {
+	cout << "-----------Menu-----------\n";
+	cout << "\t 1. Input\n";
+	cout << "\t 2. Display\n";
+	cout << "\t 3. Save to file\n";
+	cout << "\t 4. Load from file\n";
+	cout << "\t 0. exit\n";
+	cout << "--------------------------\n\t";
+}
+
 
 void OutputData(list<Student> students) {
 	cout << "id \t name \t\t\t score\n";
@@ -80,37 +136,26 @@ void OpenFileRead(ifstream &fin, list<Student> *fileReads) {
 		return;
 	}
 
-	// reading file from file in to student
-	//fin.read((char*)&s, sizeof(s));
-
 	string temp;
 
-	//getline(fin, temp);
-	int id;
-	string firstName, lastName;
-
-	float score;
-	
-//	getline(fin, temp);
-	//cout << temp;
-	while (getline(fin,temp))
+	while (getline(fin, temp))
 	{
 		Student s;
 		s._id = std::stoi(temp);
 		getline(fin, temp);
-		s._name = temp ;
+		s._name = temp;
 		getline(fin, temp);
 		s._score = std::stof(temp);
-		fileReads->push_back(s);	
+		fileReads->push_back(s);
 	}
-
 }
 
 void RangeScore(list<Student> *students) {
 	students->sort(Compare);
 }
 
-void OpenFileWrite(ofstream &of, list<Student> students) {
+void OpenFileWrite(string name, ofstream &of, list<Student> students) {
+	
 	of.open("studenmanager.txt");
 	if (!of)
 	{
@@ -134,7 +179,8 @@ void InsertStudent(int id, string name, float score, list<Student> *students) {
 		s._name = name;
 		s._score = score;
 		students->push_back(s);
-		cout << "\nadd complete\n";
+		cout << "\nadd complete";
+	//	Sleep(2000);
 		return;
 	}
 	cout << "\nthis ID was exists\n";
