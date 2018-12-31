@@ -21,7 +21,7 @@ void InsertStudent(Student s, list<Student> *students);
 bool CheckExists(int id, list<Student> students);
 void RangeScore(list<Student> *students);
 bool Compare(const Student &a, const Student &b);
-void OpenFile(ofstream &of);
+void OpenFileWrite(ofstream &of,list<Student> students);
 
 #pragma endregion
 
@@ -41,15 +41,12 @@ int main() {
 
 	// open file and write
 	ofstream of;
-	OpenFile(of);
+	OpenFile(of,students);
 
 	// open and read
 
 
-	for each (auto item in students)
-	{
-		of << item._id << "\t" << item._name << "\t\t" << item._score << endl;
-	}
+	
 
 	of.close();
 	system("pause");
@@ -60,15 +57,18 @@ void RangeScore(list<Student> *students) {
 	students->sort(Compare);
 }
 
-void OpenFile(ofstream &of) {
+void OpenFileWrite(ofstream &of,list<Student> students) {
 	of.open("studenmanager.txt");
+
+	for each (auto item in students)
+	{
+		of << item._id << "\t" << item._name << "\t\t" << item._score << endl;
+	}
 }
 
 bool Compare(const Student &a, const Student &b) {
 	return a._score > b._score;
 }
-
-
 
 void InsertStudent(int id, string name, float score, list<Student> *students) {
 	if (CheckExists(id, *students))
