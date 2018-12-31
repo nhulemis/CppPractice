@@ -35,34 +35,18 @@ bool AllowFileName(string fname);
 int main() {
 
 	list<Student> students;
-	//Student s;
-	//s._id = 1;
-	//s._name = "abc haha";
-	//s._score = 7.5;
-	//InsertStudent(s, &students);
+
 	InsertStudent(2, "xyz tao lao", 8, &students);
 	InsertStudent(3, "obc thien dia", 7, &students);
 	InsertStudent(4, "met roi nghe", 7.2, &students);
 	InsertStudent(5, "hihi abc xyz", 7.3, &students);
+
 	system("cls");
-	//RangeScore(&students);
 
-
-	//// open file and write
 	ofstream of;
-	//OpenFileWrite(of, students);
 
-	//of.close();
-	////	OutputData(students);
+	ifstream fin;
 
-	//	// open and read
-	//ifstream fin;
-	//list<Student> fileReads;
-	//OpenFileRead(fin, &fileReads);
-
-	//// output file readed on console
-	//OutputData(fileReads);
-	//fin.close();
 	int sc;
 	do
 	{
@@ -85,6 +69,8 @@ int main() {
 			of.close();
 			break;
 		case 4:
+			students.clear();
+			OpenFileRead(fin, &students);
 			break;
 		default:
 			sc = 0;
@@ -140,10 +126,25 @@ void OutputData(list<Student> students) {
 }
 
 void OpenFileRead(ifstream &fin, list<Student> *fileReads) {
+	string fname;
+	cout << "please input file name with format *.txt or *.cpp\nIf you don't input file name,we will set 'studentmanager.txt' as default\n file name : ";
+	cin.ignore();
+	getline(cin, fname);
+	if (size(fname) == 0)
+	{
+		fname = "studentmanager.txt";
+	}
+	if (!AllowFileName(fname))
+	{
+		cout << "format file not support\n";
+		return;
+	}
+
 	// read file
-	fin.open("studenmanager.txt");
+	fin.open(fname);
 	if (!fin)
 	{
+		cout << "open file fail\n";
 		return;
 	}
 
@@ -159,6 +160,8 @@ void OpenFileRead(ifstream &fin, list<Student> *fileReads) {
 		s._score = std::stof(temp);
 		fileReads->push_back(s);
 	}
+
+	cout << "\n\nRead complete\n\n";
 }
 
 void RangeScore(list<Student> *students) {
@@ -167,9 +170,13 @@ void RangeScore(list<Student> *students) {
 
 void OpenFileWrite(ofstream &of, list<Student> students) {
 	string fname;
-	cout << "please input file name with format *.txt or *.cpp\n file name : ";
+	cout << "please input file name with format *.txt or *.cpp\nIf you don't input file name,we will set 'studentmanager.txt' as default\n file name : ";
 	cin.ignore();
 	getline(cin, fname);
+	if (size(fname)==0)
+	{
+		fname = "studentmanager.txt";
+	}
 	if (!AllowFileName(fname))
 	{
 		cout << "format file not support\n";
@@ -185,7 +192,7 @@ void OpenFileWrite(ofstream &of, list<Student> students) {
 	{
 		of << item._id << "\n" << item._name << "\n" << item._score << endl;
 	}
-	cout << "Save complete\n";
+	cout << "\n\nSave complete\n\n";
 	of.close();
 }
 
