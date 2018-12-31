@@ -21,11 +21,12 @@ void InsertStudent(Student s, list<Student> *students);
 bool CheckExists(int id, list<Student> students);
 void RangeScore(list<Student> *students);
 bool Compare(const Student &a, const Student &b);
-void OpenFileWrite(string name, ofstream &of, list<Student> students);
+void OpenFileWrite(ofstream &of, list<Student> students);
 void OpenFileRead(ifstream &fin, list<Student>* fileReads);
 void OutputData(list<Student> students);
 void ShowMenu();
 void InputStudent(list<Student> *students);
+bool AllowFileName(string fname);
 #pragma endregion
 
 
@@ -48,7 +49,7 @@ int main() {
 
 
 	//// open file and write
-	//ofstream of;
+	ofstream of;
 	//OpenFileWrite(of, students);
 
 	//of.close();
@@ -77,9 +78,11 @@ int main() {
 			break;
 		case 2:
 			OutputData(students);
-			cout << "\n\n\n\n";
+			cout << "\n\n";
 			break;
 		case 3:
+			OpenFileWrite(of, students);
+			of.close();
 			break;
 		case 4:
 			break;
@@ -91,6 +94,14 @@ int main() {
 
 	system("pause");
 	return 0;
+}
+
+bool AllowFileName(string fname){
+	if (fname.find(".txt") || fname.find(".cpp"))
+	{
+		return true;
+	}
+	return false;
 }
 
 void InputStudent(list<Student> *students) {
@@ -154,17 +165,28 @@ void RangeScore(list<Student> *students) {
 	students->sort(Compare);
 }
 
-void OpenFileWrite(string name, ofstream &of, list<Student> students) {
-	
-	of.open("studenmanager.txt");
+void OpenFileWrite(ofstream &of, list<Student> students) {
+	string fname;
+	cout << "please input file name with format *.txt or *.cpp\n file name : ";
+	cin.ignore();
+	getline(cin, fname);
+	if (!AllowFileName(fname))
+	{
+		cout << "format file not support\n";
+		return;
+	}
+	of.open(fname);
 	if (!of)
 	{
+		cout << "open file fail\n";
 		return;
 	}
 	for each (auto item in students)
 	{
 		of << item._id << "\n" << item._name << "\n" << item._score << endl;
 	}
+	cout << "Save complete\n";
+	of.close();
 }
 
 bool Compare(const Student &a, const Student &b) {
