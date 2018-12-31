@@ -23,6 +23,8 @@ void RangeScore(list<Student> *students);
 bool Compare(const Student &a, const Student &b);
 void OpenFileWrite(ofstream &of, list<Student> students);
 void OpenFileRead(ifstream &fin, list<Student>* fileReads);
+void OutputData(list<Student> students);
+
 #pragma endregion
 
 
@@ -33,44 +35,75 @@ int main() {
 	list<Student> students;
 	Student s;
 	s._id = 1;
-	s._name = "abc xyz";
+	s._name = "abc haha";
 	s._score = 7.5;
 	InsertStudent(s, &students);
-	InsertStudent(2, "xyz abc", 8, &students);
-	InsertStudent(3, "obc haha", 7.2, &students);
+	InsertStudent(2, "xyz tao lao", 8, &students);
+	InsertStudent(3, "obc thien dia", 7, &students);
+	InsertStudent(4, "met roi nghe", 7.2, &students);
+	InsertStudent(5, "hihi abc xyz", 7.3, &students);
+
+	RangeScore(&students);
+
 
 	// open file and write
 	ofstream of;
 	OpenFileWrite(of, students);
 
-	// open and read
+	//	OutputData(students);
+
+		// open and read
 	ifstream fin;
 	list<Student> fileReads;
 	OpenFileRead(fin, &fileReads);
+
+	OutputData(fileReads);
 
 	of.close();
 	system("pause");
 	return 0;
 }
 
+void OutputData(list<Student> students) {
+	cout << "id \t name \t\t\t score\n";
+	for each (auto item in students)
+	{
+		cout << item._id << "\t" << item._name << "\t\t" << item._score << endl;
+	}
+}
+
 void OpenFileRead(ifstream &fin, list<Student> *fileReads) {
 	// read file
 	fin.open("studenmanager.txt");
+	if (!fin)
+	{
+		return;
+	}
 
-	Student s;
 	// reading file from file in to student
 	//fin.read((char*)&s, sizeof(s));
 
 	string temp;
 
-	getline(fin, temp);
+	//getline(fin, temp);
+	int id;
+	string firstName, lastName;
 
-	cout << temp;
+	float score;
+	
+//	getline(fin, temp);
+	//cout << temp;
+	while (getline(fin,temp))
+	{
+		Student s;
+		s._id = std::stoi(temp);
+		getline(fin, temp);
+		s._name = temp ;
+		getline(fin, temp);
+		s._score = std::stof(temp);
+		fileReads->push_back(s);	
+	}
 
-	/*while (!fin.eof()) {
-		cout << s._id << endl;
-		fin.read((char*)&s, sizeof(s));
-	}*/
 }
 
 void RangeScore(list<Student> *students) {
@@ -79,10 +112,13 @@ void RangeScore(list<Student> *students) {
 
 void OpenFileWrite(ofstream &of, list<Student> students) {
 	of.open("studenmanager.txt");
-
+	if (!of)
+	{
+		return;
+	}
 	for each (auto item in students)
 	{
-		of << item._id << "\t" << item._name << "\t\t" << item._score << endl;
+		of << item._id << "\n" << item._name << "\n" << item._score << endl;
 	}
 }
 
