@@ -65,9 +65,9 @@ int main() {
 		cin >> sc;
 		switch (sc)
 		{
-		case 1: 
+		case 1:
 			InputStudent(&students);
-		//	InsertStudentIntoVector(&listStudent);
+			//	InsertStudentIntoVector(&listStudent);
 			cout << "\n\n";
 			break;
 		case 2:
@@ -92,7 +92,7 @@ int main() {
 	return 0;
 }
 
-void InsertStudentIntoVector( vector<Student> *listStudent){
+void InsertStudentIntoVector(vector<Student> *listStudent) {
 	Student s;
 	int id;
 	string name;
@@ -107,7 +107,7 @@ void InsertStudentIntoVector( vector<Student> *listStudent){
 	cout << "Score : ";
 	cin >> s._score;
 
-	if (CheckExistsInVector(s,*listStudent))
+	if (CheckExistsInVector(s, *listStudent))
 	{
 		listStudent->push_back(s);
 		cout << "\t add complete \n";
@@ -119,7 +119,7 @@ void InsertStudentIntoVector( vector<Student> *listStudent){
 bool CheckExistsInVector(Student s, vector<Student> list) {
 	for each (auto var in list)
 	{
-		if (s._id== var._id)
+		if (s._id == var._id)
 		{
 			return false;
 		}
@@ -127,7 +127,7 @@ bool CheckExistsInVector(Student s, vector<Student> list) {
 	return true;
 }
 
-bool AllowFileName(string fname){
+bool AllowFileName(string fname) {
 	if (fname.find(".txt") || fname.find(".cpp"))
 	{
 		return true;
@@ -151,7 +151,7 @@ void InputStudent(list<Student> *students) {
 		cout << "Score : ";
 		cin >> score;
 
-	} while (score>=0 && score <=10);
+	} while (score < 0 || score > 10);
 	InsertStudent(id, name, score, students);
 }
 
@@ -201,11 +201,11 @@ void OpenFileRead(ifstream &fin, list<Student> *fileReads) {
 	while (getline(fin, temp))
 	{
 		Student s;
-		s._id = std::stoi(temp);
+		s._id = stoi(temp);
 		getline(fin, temp);
 		s._name = temp;
 		getline(fin, temp);
-		s._score = std::stof(temp);
+		s._score = stof(temp);
 		fileReads->push_back(s);
 	}
 
@@ -221,7 +221,7 @@ void OpenFileWrite(ofstream &of, list<Student> students) {
 	cout << "please input file name with format *.txt or *.cpp\nIf you don't input file name,we will set 'studentmanager.txt' as default\n file name : ";
 	cin.ignore();
 	getline(cin, fname);
-	if (size(fname)==0)
+	if (size(fname) == 0)
 	{
 		fname = "studentmanager.txt";
 	}
@@ -257,7 +257,7 @@ void InsertStudent(int id, string name, float score, list<Student> *students) {
 		s._score = score;
 		students->push_back(s);
 		cout << "\nadd complete";
-	//	Sleep(2000);
+		//	Sleep(2000);
 		return;
 	}
 	cout << "\nthis ID was exists\n";
