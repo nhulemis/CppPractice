@@ -3,7 +3,10 @@
 #include <list>
 #include <fstream>
 #include<Windows.h>
+#include <vector>
+
 using namespace std;
+
 #pragma region Struct
 struct Student
 {
@@ -27,6 +30,10 @@ void OutputData(list<Student> students);
 void ShowMenu();
 void InputStudent(list<Student> *students);
 bool AllowFileName(string fname);
+
+// use vector for manager
+void InsertStudentIntoVector(vector<Student> *listStudent);
+bool CheckExistsInVector(Student s, vector<Student> list);
 #pragma endregion
 
 
@@ -35,6 +42,8 @@ bool AllowFileName(string fname);
 int main() {
 
 	list<Student> students;
+
+	vector<Student> listStudent;
 
 	InsertStudent(2, "xyz tao lao", 8, &students);
 	InsertStudent(3, "obc thien dia", 7, &students);
@@ -58,6 +67,7 @@ int main() {
 		{
 		case 1: 
 			InputStudent(&students);
+		//	InsertStudentIntoVector(&listStudent);
 			cout << "\n\n";
 			break;
 		case 2:
@@ -82,6 +92,41 @@ int main() {
 	return 0;
 }
 
+void InsertStudentIntoVector( vector<Student> *listStudent){
+	Student s;
+	int id;
+	string name;
+	float score;
+	cout << "ID : ";
+	cin >> s._id;
+	cin.ignore();
+	cout << "Name : ";
+	getline(cin, s._name);
+	fflush(stdin);
+	//cin.ignore();
+	cout << "Score : ";
+	cin >> s._score;
+
+	if (CheckExistsInVector(s,*listStudent))
+	{
+		listStudent->push_back(s);
+		cout << "\t add complete \n";
+		return;
+	}
+	cout << "\t id was exists\n";
+}
+
+bool CheckExistsInVector(Student s, vector<Student> list) {
+	for each (auto var in list)
+	{
+		if (s._id== var._id)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 bool AllowFileName(string fname){
 	if (fname.find(".txt") || fname.find(".cpp"))
 	{
@@ -101,8 +146,12 @@ void InputStudent(list<Student> *students) {
 	getline(cin, name);
 	fflush(stdin);
 	//cin.ignore();
-	cout << "Score : ";
-	cin >> score;
+	do
+	{
+		cout << "Score : ";
+		cin >> score;
+
+	} while (score>=0 && score <=10);
 	InsertStudent(id, name, score, students);
 }
 
@@ -115,7 +164,6 @@ void ShowMenu() {
 	cout << "\t 0. exit\n";
 	cout << "--------------------------\n\t";
 }
-
 
 void OutputData(list<Student> students) {
 	cout << "id \t name \t\t\t score\n";
@@ -239,3 +287,5 @@ bool CheckExists(int id, list<Student> students) {
 	}
 	return true;
 }
+
+
