@@ -4,11 +4,11 @@
 using namespace std;
 
 int main() {
-	
-	const MyPoint* pa = new MyPoint(1, 1);
-	MyPoint* pb = new MyPoint(pa);
+	//MyPoint a = new MyPoint(0, 0);
+	const MyPoint pa (0,0) ;
+	MyPoint pb(pa);
 
-	cout << pb->Distance(*pa)<< endl;
+	cout << pb.GetX()<< endl;
 
 
 	system("pause");
