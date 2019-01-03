@@ -3,8 +3,7 @@
 
 using namespace std;
 
-int mPosX;
-int mPosY;
+
 
 MyPoint::MyPoint()
 {
@@ -21,9 +20,25 @@ void MyPoint::Display()
 	cout << "X : " << mPosX << "- Y : " << mPosY << endl;
 }
 
+void MyPoint::SetX(int x)
+{
+	this->mPosX = x;
+}
 
+int MyPoint::GetX()
+{
+	return this->mPosX;
+}
 
+void MyPoint::SetY(int y)
+{
+	this->mPosY = y;
+}
 
+int MyPoint::GetY()
+{
+	return this->mPosY;
+}
 
 MyPoint::~MyPoint()
 {
