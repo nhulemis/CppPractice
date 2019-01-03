@@ -7,6 +7,7 @@ protected:
 public:
 	MyPoint();
 	MyPoint(int x, int y);
+	MyPoint(const MyPoint &point);
 public:
 	virtual void Display();
 	void SetX(int x);

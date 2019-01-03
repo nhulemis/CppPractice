@@ -16,6 +16,12 @@ MyPoint::MyPoint(int x, int y) {
 	this->mPosY = y;
 }
 
+MyPoint::MyPoint(const MyPoint & point)
+{
+	this->mPosX = point.mPosX;
+	this->mPosY = point.mPosY;
+}
+
 void MyPoint::Display()
 {
 	cout << "X : " << mPosX << "- Y : " << mPosY << endl;
