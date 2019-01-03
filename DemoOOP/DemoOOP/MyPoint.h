@@ -13,6 +13,7 @@ public:
 	int GetX();
 	void SetY(int y);
 	int GetY();
+	double Distance(MyPoint p);
 	~MyPoint();
 };
 
