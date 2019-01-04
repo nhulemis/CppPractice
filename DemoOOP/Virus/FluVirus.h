@@ -5,10 +5,10 @@ class FluVirus : public Virus
 
 protected:
 	int m_color;
-public:	
-	static const int BLUE = 0x0000ff;
-	static const int RED = 0x000000;
-
+private:	
+	 const int BLUE = 0x0000ff;
+	 const int RED = 0x000000;
+public:
 	FluVirus();
 	FluVirus(int color);
 	FluVirus(int color,int resistance);

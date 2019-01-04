@@ -6,6 +6,7 @@
 
 Patient::Patient()
 {
+	this->m_resistance = InitResistance();
 }
 
 Patient::Patient(int stage)
@@ -18,10 +19,10 @@ Patient::~Patient()
 {
 }
 
-void Patient::InitResistance()
+int Patient::InitResistance()
 {
 	int resistance = rand()% 8001 + 1000;
-	Patient(resistance);
+	return resistance;
 }
 
 void Patient::DoStart()

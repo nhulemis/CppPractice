@@ -10,13 +10,9 @@ int main() {
 
 	Patient * pa = new Patient();
 
-	pa->DoStart();
-	/*std::srand(time(0));
-	for (int i = 0; i < 10; i++)
-	{
-		
-		cout << rand() % 10 + 1 <<endl;
-	}*/
+	Virus * den = new DengueVirus();
+	den = den->DoBorn();
+	den->InitResistance();
 	system("pause");
 	return 0;
 }

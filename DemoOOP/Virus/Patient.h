@@ -11,11 +11,12 @@ private:
 	int m_resistance;
 	int m_stage;
 	std::list<Virus*> m_virusList;
+	int InitResistance();
 public:
 	Patient();
 	Patient(int stage);
 	~Patient();
-	void InitResistance();
+	
 	void DoStart();
 	void TakeMedicine();
 
