@@ -2,7 +2,6 @@
 #include <list>
 class Virus
 {
-
 protected:
 	int m_resistance;
 	char* m_dna;
@@ -18,11 +17,11 @@ public:
 
 	virtual	void ReduceResistance(int medicine_resistance);
 
-	virtual void DoBorn() = 0;
+	virtual void  DoBorn() = 0;
 
 	virtual void DoDie() = 0;
 
-	virtual void DoClone() = 0;
+	virtual Virus *DoClone() = 0;
 
 	virtual void InitResistance() = 0;
 };

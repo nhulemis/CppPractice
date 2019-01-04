@@ -20,8 +20,8 @@ public:
 
 	virtual void DoDie();
 
-	virtual void DoClone();
-
+	virtual Virus* DoClone();
+	 
 	virtual void InitResistance();
 	
 };
