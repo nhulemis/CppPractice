@@ -42,7 +42,7 @@ Virus* DengueVirus::DoBorn()
 		strcpy_s(this->m_protein, "E");
 		break;
 	}
-	std::cout << "den\n";
+	//std::cout << "den\n";
 	return this;
 }
 
@@ -60,4 +60,8 @@ Virus* DengueVirus::DoClone()
 
 void DengueVirus::InitResistance()
 {
+	if (this->m_protein )
+	{
+
+	}
 }

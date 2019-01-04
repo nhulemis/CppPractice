@@ -17,6 +17,7 @@ public:
 	~Patient();
 	void InitResistance();
 	void DoStart();
+	void TakeMedicine();
 
 };
 

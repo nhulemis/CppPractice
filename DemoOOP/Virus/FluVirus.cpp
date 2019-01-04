@@ -43,7 +43,7 @@ Virus * FluVirus::DoBorn()
 	{
 		this->m_color = RED;
 	}
-	std::cout << "flu\t" << this->m_color << "\n";
+	//std::cout << "flu\t" << this->m_color << "\n";
 	return this;
 }
 

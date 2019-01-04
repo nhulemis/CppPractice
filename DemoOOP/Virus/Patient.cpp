@@ -20,6 +20,8 @@ Patient::~Patient()
 
 void Patient::InitResistance()
 {
+	int resistance = rand()% 8001 + 1000;
+	Patient(resistance);
 }
 
 void Patient::DoStart()
@@ -44,5 +46,14 @@ void Patient::DoStart()
 		vrRand = vrRand->DoBorn();
 		m_virusList.push_back(vrRand);
 	}
-	std::cout << m_virusList.size();
+	//std::cout << m_virusList.size();
+}
+
+void Patient::TakeMedicine()
+{
+	int medicin_resistance = rand() % 60 + 1;
+	for each (auto item in m_virusList)
+	{
+		item->ReduceResistance(medicin_resistance);
+	}
 }
