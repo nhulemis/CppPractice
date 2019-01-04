@@ -2,6 +2,7 @@
 #include <time.h>
 #include <list>
 #include<string.h>
+#include <iostream>
 
 
 
@@ -22,10 +23,10 @@ DengueVirus::~DengueVirus()
 {
 }
 
-void DengueVirus::DoBorn()
+Virus* DengueVirus::DoBorn()
 {
 	this->LoadDNAInformation();
-	std::srand(time(0));
+	//std::srand(time(0));
 	// rand() %(b-a+1)+a;
 	int result = rand() % 3 + 1;
 	this->m_protein[0] = '\0';
@@ -41,6 +42,8 @@ void DengueVirus::DoBorn()
 		strcpy_s(this->m_protein, "E");
 		break;
 	}
+	std::cout << "den\n";
+	return this;
 }
 
 void DengueVirus::DoDie()

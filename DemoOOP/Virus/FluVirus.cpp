@@ -30,12 +30,12 @@ FluVirus::~FluVirus()
 {
 }
 
-void FluVirus::DoBorn()
+Virus * FluVirus::DoBorn()
 {
 	this->LoadDNAInformation();
-	std::srand(time(0));
+//	std::srand(time(0));
 	int result = rand() % 10;
-	if (result%2==0)
+	if (result%2 !=0)
 	{
 		this->m_color = BLUE;
 	}
@@ -43,6 +43,8 @@ void FluVirus::DoBorn()
 	{
 		this->m_color = RED;
 	}
+	std::cout << "flu\t" << this->m_color << "\n";
+	return this;
 }
 
 void FluVirus::DoDie()

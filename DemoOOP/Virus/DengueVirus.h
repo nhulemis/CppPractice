@@ -10,7 +10,7 @@ public:
 	DengueVirus(const DengueVirus* den);
 	~DengueVirus();
 
-	virtual void DoBorn();
+	virtual  Virus* DoBorn();
 
 	virtual void DoDie();
 

@@ -16,7 +16,7 @@ public:
 	
 	~FluVirus();
 
-	virtual void DoBorn();
+	virtual Virus * DoBorn();
 
 	virtual void DoDie();
 

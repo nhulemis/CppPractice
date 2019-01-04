@@ -17,7 +17,7 @@ public:
 
 	virtual	void ReduceResistance(int medicine_resistance);
 
-	virtual void  DoBorn() = 0;
+	virtual Virus *DoBorn() = 0;
 
 	virtual void DoDie() = 0;
 
