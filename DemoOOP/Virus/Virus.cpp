@@ -11,7 +11,7 @@ Virus::Virus()
 {
 }
 
-Virus::Virus(int m_resistance, char * m_dna)
+Virus::Virus(int m_resistance)
 {
 	this->m_resistance = m_resistance;
 	this->m_dna = m_dna;
@@ -42,7 +42,7 @@ void Virus::LoadDNAInformation()
 
 	getline(fin, temp);
 
-	m_dna = const_cast<char*>(temp.c_str());
+	this->m_dna = const_cast<char*>(temp.c_str());
 	 
 	fin.close();
 }

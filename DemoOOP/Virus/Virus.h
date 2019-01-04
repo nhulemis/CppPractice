@@ -6,7 +6,7 @@ protected:
 	char* m_dna;
 public:
 	Virus();
-	Virus(int m_resistance, char* m_dna);
+	Virus(int m_resistance);
 	Virus(const Virus &vr);
 	~Virus();
 
