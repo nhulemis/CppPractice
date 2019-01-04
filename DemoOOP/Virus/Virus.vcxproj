@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DengueVirus.cpp" />
     <ClCompile Include="FluVirus.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Virus.cpp">
@@ -153,6 +154,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DengueVirus.h" />
     <ClInclude Include="FluVirus.h" />
     <ClInclude Include="Virus.h" />
   </ItemGroup>
