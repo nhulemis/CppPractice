@@ -21,9 +21,15 @@
     <ClCompile Include="Virus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FluVirus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Virus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FluVirus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
