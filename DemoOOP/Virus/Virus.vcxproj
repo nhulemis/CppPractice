@@ -149,6 +149,7 @@
     <ClCompile Include="DengueVirus.cpp" />
     <ClCompile Include="FluVirus.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Patient.cpp" />
     <ClCompile Include="Virus.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -156,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="DengueVirus.h" />
     <ClInclude Include="FluVirus.h" />
+    <ClInclude Include="Patient.h" />
     <ClInclude Include="Virus.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
