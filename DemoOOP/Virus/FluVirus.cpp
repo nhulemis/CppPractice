@@ -13,6 +13,13 @@ FluVirus::FluVirus(int color, int resistance)
 	this->m_resistance = resistance;
 }
 
+FluVirus::FluVirus(const FluVirus * flu)
+{
+	this->m_color = flu->m_color;
+	this->m_resistance = flu->m_resistance;
+	this->m_dna = flu->m_dna;
+}
+
 FluVirus::FluVirus(int color)
 {
 	this->m_color = color;
@@ -40,11 +47,12 @@ void FluVirus::DoBorn()
 
 void FluVirus::DoDie()
 {
+	
 }
 
 void FluVirus::DoClone()
 {
-
+	
 }
 
 void FluVirus::InitResistance()

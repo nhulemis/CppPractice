@@ -12,6 +12,7 @@ public:
 	FluVirus();
 	FluVirus(int color);
 	FluVirus(int color,int resistance);
+	FluVirus(const FluVirus * flu);
 	
 	~FluVirus();
 
