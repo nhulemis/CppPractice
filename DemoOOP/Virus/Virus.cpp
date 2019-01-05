@@ -9,6 +9,8 @@ using namespace std;
 
 Virus::Virus()
 {
+	//std::cout << "vr\n";
+	
 }
 
 Virus::Virus(int m_resistance)
@@ -26,7 +28,7 @@ Virus::Virus(const Virus &vr)
 
 Virus::~Virus()
 {
-	delete m_dna;
+	//delete m_dna;
 	//std::cout << "destroy virus\n";
 }
 
@@ -34,28 +36,35 @@ void Virus::LoadDNAInformation()
 {
 	ifstream fin;
 	fin.open("ATGX.bin");
-	if (!fin)
+	if (fin)
 	{
-		cout << "load file fail \n";
-		return;
+		string temp;
+		getline(fin, temp);
+		fin.close();
+		//strcpy_s(&m_dna, temp.c_str());
+		this->m_dna = const_cast<char*>(temp.c_str());
+		//return m_dna;
+		//std::cout << m_dna;
 	}
-	//cin.ignore();
-	string temp;
-
-	getline(fin, temp);
-
-	this->m_dna = const_cast<char*>(temp.c_str());
-	 
-	fin.close();
+	else
+	{
+		cout << "load file fail \n";	
+		//return NULL;
+	}
 }
 
-void Virus::ReduceResistance(int medicine_resistance)
+
+/*return true = dead
+return false = alive*/
+bool Virus::ReduceResistance(int medicine_resistance)
 {
+	this->m_resistance -= medicine_resistance;
 	if (this->m_resistance <=0)
 	{
 		//cout << "destroy\n";
 		this->DoDie();
-		return;
+		return true;
 	}
-	this->m_resistance -= medicine_resistance;
+	
+	return false;
 }

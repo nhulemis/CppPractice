@@ -5,6 +5,9 @@
 
 FluVirus::FluVirus()
 {
+	//std::cout << "flu\n";
+	DoBorn();
+	InitResistance();
 }
 
 FluVirus::FluVirus(int color, int resistance)
@@ -28,15 +31,15 @@ FluVirus::FluVirus(int color)
 
 FluVirus::~FluVirus()
 {
-	std::cout << "destroy Flu virus\n";
+	//std::cout << "destroy Flu virus\n";
 }
 
 Virus * FluVirus::DoBorn()
 {
-	this->LoadDNAInformation();
-//	std::srand(time(0));
+	LoadDNAInformation();
+	//std::srand(time(0));
 	int result = rand() % 10;
-	if (result%2 !=0)
+	if (result % 2 != 0)
 	{
 		this->m_color = BLUE;
 	}
@@ -63,14 +66,14 @@ void FluVirus::InitResistance()
 {
 	if (this->m_color == RED)
 	{
-		std::srand(time(0));
+		//std::srand(time(0));
 		// rand() %(b-a+1)+a;
 		this->m_resistance = rand() % 11 + 10;
 		return;
 	}
 	else
 	{
-		std::srand(time(0));
+		//std::srand(time(0));
 		// rand() %(b-a+1)+a;
 		this->m_resistance = rand() % 6 + 10;
 		return;

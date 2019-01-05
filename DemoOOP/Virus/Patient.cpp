@@ -7,11 +7,24 @@
 Patient::Patient()
 {
 	this->m_resistance = InitResistance();
+
+	m_virusList = new std::vector<Virus*>();
+
+	DoStart();
+
+
+
 }
 
 Patient::Patient(int stage)
 {
 	this->m_stage = stage;
+
+	this->m_resistance = InitResistance();
+
+	m_virusList = new std::vector<Virus*>();
+
+	DoStart();
 }
 
 
@@ -22,7 +35,8 @@ Patient::~Patient()
 
 int Patient::InitResistance()
 {
-	int resistance = rand()% 8001 + 1000;
+	std::srand(time(0));
+	int resistance = rand() % 8001 + 1000;
 	return resistance;
 }
 
@@ -45,21 +59,65 @@ void Patient::DoStart()
 		{
 			vrRand = new DengueVirus();
 		}
-		vrRand = vrRand->DoBorn();
+		//vrRand = vrRand->DoBorn();
 		m_virusList->push_back(vrRand);
 	}
-	Patient(1);
+
 	//std::cout << m_virusList.size();
 }
 
-void Patient::TakeMedicine()
+void Patient::TakeMedicine(int medicin_resistance)
 {
-	int medicin_resistance = rand() % 60 + 1;
-	for each (auto item in *m_virusList)
+	//	std::vector<Virus*>::iterator pos = m_virusList->begin();
+		//std::vector<Virus*> *tempDie = new std::vector<Virus*>();
+	int i = 0;
+	while (i != m_virusList->size())
 	{
-		item->ReduceResistance(medicin_resistance);
+		auto var = m_virusList->at(i)->ReduceResistance(medicin_resistance);
+		if (var)
+		{
+			m_virusList->erase(m_virusList->begin() + i);
+		}
+		else
+		{
+			i++;
+		}
+	}
+
+	if (m_virusList->size() != 0)
+	{
+		std::vector<Virus*> *tempBorn = new std::vector<Virus*>();
+		for each (auto var in *m_virusList)
+		{
+			if (dynamic_cast<FluVirus*>(var))
+			{
+				//FluVirus *flu = (FluVirus*)var;
+				tempBorn->push_back(var->DoClone());
+			}
+			else if (dynamic_cast<DengueVirus*>(var))
+			{
+				//std::cout << "den\n";
+			//	var->DoClone();
+				tempBorn->push_back(var->DoClone());
+				tempBorn->push_back(var->DoClone());
+			}
+		}
+
+		for each (auto var in *tempBorn)
+		{
+			m_virusList->push_back(var);
+		}
+	}
+	
+
+	if (m_virusList->size() > this->m_resistance)
+	{
+		std::cout << "die\n";
+		this->m_stage = 0;
 	}
 }
+
+
 
 int Patient::GetStage()
 {
@@ -69,6 +127,6 @@ int Patient::GetStage()
 void Patient::DoDie()
 {
 	//m_virusList->clear();
-	delete this;	
-	
+	delete this;
+
 }

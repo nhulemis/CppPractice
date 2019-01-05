@@ -1,5 +1,5 @@
 #pragma once
-#include <list>
+#include <vector>
 #include "Virus.h"
 #include "DengueVirus.h"
 #include "FluVirus.h"
@@ -10,7 +10,7 @@ class Patient
 private:
 	int m_resistance;
 	int m_stage;
-	std::list<Virus*> *m_virusList;
+	std::vector<Virus*> *m_virusList;
 	int InitResistance();
 public:
 	Patient();
@@ -18,7 +18,7 @@ public:
 	~Patient();
 	
 	void DoStart();
-	void TakeMedicine();
+	void TakeMedicine(int medicin_resistance);
 	int GetStage();
 	void DoDie();
 

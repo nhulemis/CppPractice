@@ -4,7 +4,7 @@ class Virus
 {
 protected:
 	int m_resistance;
-	char* m_dna;
+	char *m_dna;
 
 public:
 	Virus();
@@ -15,7 +15,7 @@ public:
 public:
 	void LoadDNAInformation();
 
-	virtual	void ReduceResistance(int medicine_resistance);
+	virtual	bool ReduceResistance(int medicine_resistance);
 
 	virtual Virus *DoBorn() = 0;
 

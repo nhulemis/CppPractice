@@ -8,6 +8,9 @@
 
 DengueVirus::DengueVirus()
 {
+//	std::cout << "den\n";
+	DoBorn();
+	InitResistance();
 }
 
 DengueVirus::DengueVirus(const DengueVirus * den)
@@ -21,7 +24,7 @@ DengueVirus::DengueVirus(const DengueVirus * den)
 
 DengueVirus::~DengueVirus()
 {
-	std::cout << "destroy Dengue virus\n";
+//	std::cout << "destroy Dengue virus\n";
 }
 
 Virus* DengueVirus::DoBorn()
@@ -54,10 +57,10 @@ void DengueVirus::DoDie()
 
 Virus* DengueVirus::DoClone()
 {
-	static Virus *list[2];
-	list[0] = new DengueVirus(this);
-	list[1] = new DengueVirus(this);
-	return *list;
+	Virus *clone;
+	clone = new DengueVirus(this);
+	//list[1] = new DengueVirus(this);
+	return clone;	
 }
 
 void DengueVirus::InitResistance()
