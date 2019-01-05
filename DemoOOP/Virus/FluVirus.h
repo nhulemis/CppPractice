@@ -14,7 +14,7 @@ public:
 	FluVirus(int color,int resistance);
 	FluVirus(const FluVirus * flu);
 	
-	~FluVirus();
+	virtual ~FluVirus();
 
 	virtual Virus * DoBorn();
 
@@ -23,6 +23,10 @@ public:
 	virtual Virus* DoClone();
 	 
 	virtual void InitResistance();
+public:
+	virtual int GetColor() {
+		return m_color;
+	}
 	
 };
 

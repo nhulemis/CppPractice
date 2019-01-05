@@ -45,16 +45,29 @@ void Patient::DoStart()
 			vrRand = new DengueVirus();
 		}
 		vrRand = vrRand->DoBorn();
-		m_virusList.push_back(vrRand);
+		m_virusList->push_back(vrRand);
 	}
+	Patient(1);
 	//std::cout << m_virusList.size();
 }
 
 void Patient::TakeMedicine()
 {
 	int medicin_resistance = rand() % 60 + 1;
-	for each (auto item in m_virusList)
+	for each (auto item in *m_virusList)
 	{
 		item->ReduceResistance(medicin_resistance);
 	}
+}
+
+int Patient::GetStage()
+{
+	return this->m_stage;
+}
+
+void Patient::DoDie()
+{
+	//m_virusList->clear();
+	delete m_virusList;
+	
 }

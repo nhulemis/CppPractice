@@ -10,7 +10,7 @@ class Patient
 private:
 	int m_resistance;
 	int m_stage;
-	std::list<Virus*> m_virusList;
+	std::list<Virus*> *m_virusList;
 	int InitResistance();
 public:
 	Patient();
@@ -19,6 +19,8 @@ public:
 	
 	void DoStart();
 	void TakeMedicine();
+	int GetStage();
+	void DoDie();
 
 };
 

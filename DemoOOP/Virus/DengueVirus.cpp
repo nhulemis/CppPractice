@@ -21,6 +21,7 @@ DengueVirus::DengueVirus(const DengueVirus * den)
 
 DengueVirus::~DengueVirus()
 {
+	std::cout << "destroy Dengue virus\n";
 }
 
 Virus* DengueVirus::DoBorn()
@@ -48,6 +49,7 @@ Virus* DengueVirus::DoBorn()
 
 void DengueVirus::DoDie()
 {
+	delete this;
 }
 
 Virus* DengueVirus::DoClone()

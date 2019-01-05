@@ -12,7 +12,7 @@ protected:
 public:
 	DengueVirus();
 	DengueVirus(const DengueVirus* den);
-	~DengueVirus();
+	virtual ~DengueVirus();
 
 	virtual  Virus* DoBorn();
 

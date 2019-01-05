@@ -8,11 +8,12 @@ using namespace std;
 
 int main() {
 
-	Patient * pa = new Patient();
+	Virus* vr = new FluVirus(0,20);
+	std::cout << vr <<"\n";
 
-	Virus * den = new DengueVirus();
-	den = den->DoBorn();
-	den->InitResistance();
+	vr->DoDie();
+
+	std::cout << vr << "\n";
 	system("pause");
 	return 0;
 }

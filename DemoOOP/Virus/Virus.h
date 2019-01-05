@@ -10,7 +10,7 @@ public:
 	Virus();
 	Virus(int m_resistance);
 	Virus(const Virus &vr);
-	~Virus();
+	virtual ~Virus();
 
 public:
 	void LoadDNAInformation();
@@ -24,5 +24,9 @@ public:
 	virtual Virus *DoClone() = 0;
 
 	virtual void InitResistance() = 0;
+
+	int GetResistance() {
+		return m_resistance;
+	}
 };
 

@@ -26,6 +26,8 @@ Virus::Virus(const Virus &vr)
 
 Virus::~Virus()
 {
+	
+	std::cout << "destroy virus\n";
 }
 
 void Virus::LoadDNAInformation()
@@ -51,7 +53,8 @@ void Virus::ReduceResistance(int medicine_resistance)
 {
 	if (this->m_resistance <=0)
 	{
-		cout << "destroy\n";
+		//cout << "destroy\n";
+		this->DoDie();
 		return;
 	}
 	this->m_resistance -= medicine_resistance;
