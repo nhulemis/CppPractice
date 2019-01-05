@@ -26,8 +26,8 @@ Virus::Virus(const Virus &vr)
 
 Virus::~Virus()
 {
-	
-	std::cout << "destroy virus\n";
+	delete m_dna;
+	//std::cout << "destroy virus\n";
 }
 
 void Virus::LoadDNAInformation()
