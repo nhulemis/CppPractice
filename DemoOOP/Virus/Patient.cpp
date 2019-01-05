@@ -107,12 +107,13 @@ void Patient::TakeMedicine(int medicin_resistance)
 		{
 			m_virusList->push_back(var);
 		}
+		std::cout<< "Virus : " << m_virusList->size();
 	}
 	
 
 	if (m_virusList->size() > this->m_resistance)
 	{
-		std::cout << "die\n";
+		std::cout << "\ndie\n";
 		this->m_stage = 0;
 	}
 }
