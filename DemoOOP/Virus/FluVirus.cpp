@@ -58,8 +58,8 @@ void FluVirus::DoDie()
 
 Virus* FluVirus::DoClone()
 {
-	Virus * vr = new FluVirus(this);
-	return vr;
+	return new FluVirus(this);
+	//return vr;
 }
 
 void FluVirus::InitResistance()

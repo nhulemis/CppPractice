@@ -57,10 +57,10 @@ void DengueVirus::DoDie()
 
 Virus* DengueVirus::DoClone()
 {
-	Virus *clone;
-	clone = new DengueVirus(this);
+	//Virus *clone;
+	return new DengueVirus(this);
 	//list[1] = new DengueVirus(this);
-	return clone;	
+	
 }
 
 void DengueVirus::InitResistance()

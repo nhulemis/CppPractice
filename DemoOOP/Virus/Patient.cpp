@@ -107,6 +107,7 @@ void Patient::TakeMedicine(int medicin_resistance)
 		{
 			m_virusList->push_back(var);
 		}
+		delete tempBorn;
 		std::cout<< "Virus : " << m_virusList->size();
 	}
 	
@@ -114,7 +115,7 @@ void Patient::TakeMedicine(int medicin_resistance)
 	if (m_virusList->size() > this->m_resistance)
 	{
 		std::cout << "\ndie\n";
-		this->m_stage = 0;
+		DoDie();
 	}
 }
 
@@ -128,6 +129,7 @@ int Patient::GetStage()
 void Patient::DoDie()
 {
 	//m_virusList->clear();
+	delete m_virusList;
 	delete this;
 
 }
