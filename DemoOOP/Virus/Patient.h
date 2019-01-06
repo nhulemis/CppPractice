@@ -21,6 +21,9 @@ public:
 	void TakeMedicine(int medicin_resistance);
 	int GetStage();
 	void DoDie();
+private:
+	void ReduceVirus(int medicin_resistance);
+	void CloneVirus();
 
 };
 

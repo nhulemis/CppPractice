@@ -66,55 +66,22 @@ void Patient::DoStart()
 	//std::cout << m_virusList.size();
 }
 
+
 void Patient::TakeMedicine(int medicin_resistance)
 {
 	//	std::vector<Virus*>::iterator pos = m_virusList->begin();
 		//std::vector<Virus*> *tempDie = new std::vector<Virus*>();
-	int i = 0;
-	while (i != m_virusList->size())
-	{
-		auto var = m_virusList->at(i)->ReduceResistance(medicin_resistance);
-		if (var)
-		{
-			m_virusList->erase(m_virusList->begin() + i);
-		}
-		else
-		{
-			i++;
-		}
-	}
+	ReduceVirus(medicin_resistance);
 
 	if (m_virusList->size() != 0)
 	{
-		std::vector<Virus*> *tempBorn = new std::vector<Virus*>();
-		for each (auto var in *m_virusList)
-		{
-			if (dynamic_cast<FluVirus*>(var))
-			{
-				//FluVirus *flu = (FluVirus*)var;
-				tempBorn->push_back(var->DoClone());
-			}
-			else if (dynamic_cast<DengueVirus*>(var))
-			{
-				//std::cout << "den\n";
-			//	var->DoClone();
-				tempBorn->push_back(var->DoClone());
-				tempBorn->push_back(var->DoClone());
-			}
-		}
-
-		for each (auto var in *tempBorn)
-		{
-			m_virusList->push_back(var);
-		}
-		delete tempBorn;
-		std::cout<< "Virus : " << m_virusList->size();
-	}
-	
+		CloneVirus();
+	}	
 
 	if (m_virusList->size() > this->m_resistance)
 	{
 		std::cout << "\ndie\n";
+		m_virusList->clear();
 		DoDie();
 	}
 }
@@ -128,8 +95,52 @@ int Patient::GetStage()
 
 void Patient::DoDie()
 {
-	//m_virusList->clear();
-	delete m_virusList;
 	delete this;
+	//m_virusList->clear();
+	this->m_stage = 0;
+	//delete m_virusList;
+}
 
+void Patient::ReduceVirus(int medicin_resistance)
+{
+	int i = 0;
+	while (i != m_virusList->size())
+	{
+		auto var = m_virusList->at(i)->ReduceResistance(medicin_resistance);
+		if (var)
+		{
+			m_virusList->erase(m_virusList->begin() + i);
+		}
+		else
+		{
+			i++;
+		}
+	}
+}
+
+void Patient::CloneVirus()
+{
+	std::vector<Virus*> *tempBorn = new std::vector<Virus*>();
+	for each (auto var in *m_virusList)
+	{
+		if (dynamic_cast<FluVirus*>(var))
+		{
+			//FluVirus *flu = (FluVirus*)var;
+			tempBorn->push_back(var->DoClone());
+		}
+		else if (dynamic_cast<DengueVirus*>(var))
+		{
+			//std::cout << "den\n";
+			//	var->DoClone();
+			tempBorn->push_back(var->DoClone());
+			tempBorn->push_back(var->DoClone());
+		}
+	}
+
+	for each (auto var in *tempBorn)
+	{
+		m_virusList->push_back(var);
+	}
+	delete tempBorn;
+	std::cout << "Virus : " << m_virusList->size();
 }
