@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <string.h>
 #include <cstring>
 #include <algorithm>
 
@@ -38,13 +39,16 @@ void Virus::LoadDNAInformation()
 	fin.open("ATGX.bin");
 	if (fin)
 	{
+		
 		string temp;
 		getline(fin, temp);
 		fin.close();
-		//strcpy_s(&m_dna, temp.c_str());
+		this->m_dna = new char[temp.size() + 1];
 		this->m_dna = const_cast<char*>(temp.c_str());
-		//return m_dna;
-		//std::cout << m_dna;
+		int a = strlen(m_dna);
+		int b = temp.size();
+		this->m_dna[temp.size()]='\0';
+		return;
 	}
 	else
 	{

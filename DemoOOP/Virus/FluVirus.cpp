@@ -36,7 +36,8 @@ FluVirus::~FluVirus()
 
 Virus * FluVirus::DoBorn()
 {
-	LoadDNAInformation();
+	 LoadDNAInformation();
+	// std::cout << this->m_dna;
 	//std::srand(time(0));
 	int result = rand() % 10;
 	if (result % 2 != 0)

@@ -110,6 +110,7 @@ void Patient::ReduceVirus(int medicin_resistance)
 		if (var)
 		{
 			m_virusList->erase(m_virusList->begin() + i);
+			m_virusList->at(i)->DoDie();
 		}
 		else
 		{

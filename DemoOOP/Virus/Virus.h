@@ -1,10 +1,11 @@
 #pragma once
 #include <list>
+
 class Virus
 {
 protected:
 	int m_resistance;
-	char *m_dna;
+	char* m_dna;
 
 public:
 	Virus();
