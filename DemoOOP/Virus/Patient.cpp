@@ -37,7 +37,7 @@ int Patient::InitResistance()
 {
 	std::srand(time(0));
 	int resistance = rand() % 8001 + 1000;
-	return resistance;
+	return 9000;
 }
 
 void Patient::DoStart()
@@ -86,6 +86,7 @@ void Patient::TakeMedicine(int medicin_resistance)
 	}
 }
 
+/*key co cung duoc khong co cung duoc k thanh van de =D*/
 void Patient::TakeMedicine(std::string key, int medicin_resistance)
 {
 	int a = m_virusList->size()-1;
@@ -94,31 +95,42 @@ void Patient::TakeMedicine(std::string key, int medicin_resistance)
 		if (m_virusList->at(i)->ReduceResistance(medicin_resistance))
 		{
 			m_virusList->erase(m_virusList->begin() + i);
+			//delete m_virusList->at(i);
 		}
 		else
 		{
 			if (dynamic_cast<FluVirus*>(m_virusList->at(i)))
 			{
-				//FluVirus *flu = (FluVirus*)var;
+				
 				m_virusList->push_back(m_virusList->at(i)->DoClone());
 			}
 			else if (dynamic_cast<DengueVirus*>(m_virusList->at(i)))
 			{
-				//std::cout << "den\n";
-				//	var->DoClone();
+				
 				m_virusList->push_back(m_virusList->at(i)->DoClone());
 				m_virusList->push_back(m_virusList->at(i)->DoClone());
 			}
 		}
 	}
-	std::cout << "Virus : " << m_virusList->size()<<"\n";
-	if (m_virusList->size() > this->m_resistance)
+	//
+
+	// total resistance
+	int totalResistanceVirus = 0;
+	for each (auto var in *m_virusList)
+	{
+		totalResistanceVirus += var->GetResistance();
+	}
+	if (totalResistanceVirus > this->m_resistance)
 	{
 		std::cout << "\ndie\n";
 		m_virusList->clear();
 		DoDie();
 		return;
-	}if (m_virusList->size() ==0)
+	}
+	std::cout << "Virus total : " << totalResistanceVirus<< "\n";
+	
+
+	if (m_virusList->size() ==0)
 	{
 		this->m_stage = 0;
 		std::cout << "alive\n";
@@ -134,7 +146,7 @@ int Patient::GetStage()
 
 void Patient::DoDie()
 {
-	delete this;
+	delete m_virusList;
 	//m_virusList->clear();
 	this->m_stage = 0;
 	//delete m_virusList;
@@ -170,8 +182,6 @@ void Patient::CloneVirus()
 		}
 		else if (dynamic_cast<DengueVirus*>(var))
 		{
-			//std::cout << "den\n";
-			//	var->DoClone();
 			tempBorn->push_back(var->DoClone());
 			tempBorn->push_back(var->DoClone());
 		}

@@ -62,7 +62,7 @@ bool Virus::ReduceResistance(int medicine_resistance)
 	if (this->m_resistance <=0)
 	{
 		//cout << "destroy\n";
-		this->DoDie();
+		//this->DoDie();
 		return true;
 	}
 	

@@ -54,21 +54,18 @@ Virus * FluVirus::DoBorn()
 
 void FluVirus::DoDie()
 {
-	delete this;
+	delete this->m_dna;
 }
 
 Virus* FluVirus::DoClone()
 {
 	return new FluVirus(this);
-	//return vr;
 }
 
 void FluVirus::InitResistance()
 {
 	if (this->m_color == RED)
 	{
-		//std::srand(time(0));
-		// rand() %(b-a+1)+a;
 		this->m_resistance = rand() % 11 + 10;
 		return;
 	}
