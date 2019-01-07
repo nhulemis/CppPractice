@@ -4,6 +4,7 @@
 #include "DengueVirus.h"
 #include "FluVirus.h"
 #include <time.h>
+#include <string>
 
 class Patient
 {
@@ -19,6 +20,7 @@ public:
 	
 	void DoStart();
 	void TakeMedicine(int medicin_resistance);
+	void TakeMedicine(std::string key, int medicin_resistance);
 	int GetStage();
 	void DoDie();
 private:

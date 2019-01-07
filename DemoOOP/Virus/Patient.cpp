@@ -76,13 +76,52 @@ void Patient::TakeMedicine(int medicin_resistance)
 	if (m_virusList->size() != 0)
 	{
 		CloneVirus();
-	}	
+	}
 
 	if (m_virusList->size() > this->m_resistance)
 	{
 		std::cout << "\ndie\n";
 		m_virusList->clear();
 		DoDie();
+	}
+}
+
+void Patient::TakeMedicine(std::string key, int medicin_resistance)
+{
+	int a = m_virusList->size()-1;
+	for (int i = a ; i >= 0; i--)
+	{
+		if (m_virusList->at(i)->ReduceResistance(medicin_resistance))
+		{
+			m_virusList->erase(m_virusList->begin() + i);
+		}
+		else
+		{
+			if (dynamic_cast<FluVirus*>(m_virusList->at(i)))
+			{
+				//FluVirus *flu = (FluVirus*)var;
+				m_virusList->push_back(m_virusList->at(i)->DoClone());
+			}
+			else if (dynamic_cast<DengueVirus*>(m_virusList->at(i)))
+			{
+				//std::cout << "den\n";
+				//	var->DoClone();
+				m_virusList->push_back(m_virusList->at(i)->DoClone());
+				m_virusList->push_back(m_virusList->at(i)->DoClone());
+			}
+		}
+	}
+	std::cout << "Virus : " << m_virusList->size()<<"\n";
+	if (m_virusList->size() > this->m_resistance)
+	{
+		std::cout << "\ndie\n";
+		m_virusList->clear();
+		DoDie();
+		return;
+	}if (m_virusList->size() ==0)
+	{
+		this->m_stage = 0;
+		std::cout << "alive\n";
 	}
 }
 

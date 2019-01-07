@@ -39,17 +39,11 @@ void Virus::LoadDNAInformation()
 	fin.open("ATGX.bin");
 	if (fin)
 	{
-		
-		//string temp;
-		//getline(fin, temp);
-		
+
 		this->m_dna = new char[50];
-		//this->m_dna = const_cast<char*>(temp.c_str());
-		/*int a = strlen(m_dna);
-		int b = temp.size();*/
+		
 		fin >> this->m_dna;
 		fin.close();
-		//this->m_dna[temp.size()]='\0';
 		return;
 	}
 	else
@@ -60,8 +54,8 @@ void Virus::LoadDNAInformation()
 }
 
 
-/*return true = dead
-return false = alive*/
+/*return true = virus dead
+return false = virus alive*/
 bool Virus::ReduceResistance(int medicine_resistance)
 {
 	this->m_resistance -= medicine_resistance;
