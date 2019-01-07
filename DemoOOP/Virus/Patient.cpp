@@ -37,7 +37,7 @@ int Patient::InitResistance()
 {
 	std::srand(time(0));
 	int resistance = rand() % 8001 + 1000;
-	return 9000;
+	return resistance;
 }
 
 void Patient::DoStart()
