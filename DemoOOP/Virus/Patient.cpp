@@ -4,6 +4,7 @@
 #include <time.h>
 
 
+
 Patient::Patient()
 {
 	this->m_resistance = InitResistance();
@@ -62,15 +63,14 @@ void Patient::DoStart()
 		//vrRand = vrRand->DoBorn();
 		m_virusList->push_back(vrRand);
 	}
-
+	
 	//std::cout << m_virusList.size();
 }
-
 
 void Patient::TakeMedicine(int medicin_resistance)
 {
 	//	std::vector<Virus*>::iterator pos = m_virusList->begin();
-		//std::vector<Virus*> *tempDie = new std::vector<Virus*>();
+	//std::vector<Virus*> *tempDie = new std::vector<Virus*>();
 	ReduceVirus(medicin_resistance);
 
 	if (m_virusList->size() != 0)
@@ -116,7 +116,8 @@ void Patient::TakeMedicine(std::string key, int medicin_resistance)
 
 	// total resistance
 	int totalResistanceVirus = 0;
-	for each (auto var in *m_virusList)
+	//for each (auto var in *m_virusList)
+		for (auto var : *m_virusList)
 	{
 		totalResistanceVirus += var->GetResistance();
 	}
@@ -129,15 +130,11 @@ void Patient::TakeMedicine(std::string key, int medicin_resistance)
 	}
 	std::cout << "Virus total : " << totalResistanceVirus<< "\n";
 	
-
 	if (m_virusList->size() ==0)
-	{
-		this->m_stage = 0;
+	{		
 		std::cout << "alive\n";
 	}
 }
-
-
 
 int Patient::GetStage()
 {

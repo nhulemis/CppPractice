@@ -10,7 +10,7 @@ protected:
 public:
 	Virus();
 	Virus(int m_resistance);
-	Virus(const Virus &vr);
+	Virus(const Virus *vr);
 	virtual ~Virus();
 
 public:

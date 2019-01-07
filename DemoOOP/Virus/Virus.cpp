@@ -20,10 +20,10 @@ Virus::Virus(int m_resistance)
 	this->m_dna = m_dna;
 }
 
-Virus::Virus(const Virus &vr)
+Virus::Virus(const Virus *vr)
 {
-	this->m_resistance = vr.m_resistance;
-	this->m_dna = vr.m_dna;
+	this->m_resistance = vr->m_resistance;
+	this->m_dna = vr->m_dna;
 }
 
 

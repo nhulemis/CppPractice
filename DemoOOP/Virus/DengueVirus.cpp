@@ -8,17 +8,15 @@
 
 DengueVirus::DengueVirus()
 {
-//	std::cout << "den\n";
+	//	std::cout << "den\n";
 	DoBorn();
 	InitResistance();
 }
 
-DengueVirus::DengueVirus(const DengueVirus * den)
-{
+DengueVirus::DengueVirus(const DengueVirus * den) :Virus(den)
+{	
+	
 	strcpy_s(this->m_protein, den->m_protein);
-	this->m_dna = den->m_dna;
-	this->m_resistance = den->m_resistance;
-
 }
 
 

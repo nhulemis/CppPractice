@@ -26,6 +26,5 @@ public:
 private:
 	void ReduceVirus(int medicin_resistance);
 	void CloneVirus();
-
 };
 
