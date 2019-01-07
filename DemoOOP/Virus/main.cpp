@@ -14,7 +14,7 @@ int main() {
 
 	std::srand(time(0));
 
-	int min = 0, max = 2, medicine_resistance;
+	int min = 1, max = 10, medicine_resistance;
 	int sc,sum = 0;
 	while (p->GetStage() == 1)
 	{

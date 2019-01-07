@@ -40,14 +40,16 @@ void Virus::LoadDNAInformation()
 	if (fin)
 	{
 		
-		string temp;
-		getline(fin, temp);
+		//string temp;
+		//getline(fin, temp);
+		
+		this->m_dna = new char[50];
+		//this->m_dna = const_cast<char*>(temp.c_str());
+		/*int a = strlen(m_dna);
+		int b = temp.size();*/
+		fin >> this->m_dna;
 		fin.close();
-		this->m_dna = new char[temp.size() + 1];
-		this->m_dna = const_cast<char*>(temp.c_str());
-		int a = strlen(m_dna);
-		int b = temp.size();
-		this->m_dna[temp.size()]='\0';
+		//this->m_dna[temp.size()]='\0';
 		return;
 	}
 	else
