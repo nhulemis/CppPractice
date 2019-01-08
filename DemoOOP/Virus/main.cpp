@@ -24,8 +24,7 @@ int main() {
 			p->TakeMedicine("", medicine_resistance);
 		}
 		else if (sc ==0)
-		{
-			p->DoDie();
+		{			
 			delete p;
 			break;
 		}

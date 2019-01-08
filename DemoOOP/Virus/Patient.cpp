@@ -26,7 +26,7 @@ Patient::Patient(int stage)
 
 Patient::~Patient()
 {
-	delete m_virusList;
+	DoDie();
 }
 
 int Patient::InitResistance()
@@ -138,10 +138,10 @@ void Patient::DoDie()
 	{
 		var->DoDie();
 	}
-//	delete m_virusList;
-	//m_virusList->clear();
+	delete m_virusList;
+
 	this->m_stage = 0;
-	//delete m_virusList;
+
 }
 
 void Patient::ReduceVirus(int medicin_resistance)
