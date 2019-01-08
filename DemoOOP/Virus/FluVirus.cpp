@@ -28,7 +28,7 @@ FluVirus::FluVirus(int color)
 
 
 FluVirus::~FluVirus()
-{
+{ 
 	//std::cout << "destroy Flu virus\n";
 }
 
@@ -52,7 +52,7 @@ Virus * FluVirus::DoBorn()
 
 void FluVirus::DoDie()
 {
-	delete this->m_dna;
+	delete this;
 }
 
 Virus* FluVirus::DoClone()

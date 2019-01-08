@@ -15,7 +15,6 @@ DengueVirus::DengueVirus()
 
 DengueVirus::DengueVirus(const DengueVirus * den) :Virus(den)
 {	
-	
 	strcpy_s(this->m_protein, den->m_protein);
 }
 
@@ -50,7 +49,7 @@ Virus* DengueVirus::DoBorn()
 
 void DengueVirus::DoDie()
 {
-	delete this->m_dna;
+	delete this;
 }
 
 Virus* DengueVirus::DoClone()

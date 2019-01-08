@@ -8,13 +8,8 @@
 Patient::Patient()
 {
 	this->m_resistance = InitResistance();
-
 	m_virusList = new std::vector<Virus*>();
-
 	DoStart();
-
-
-
 }
 
 Patient::Patient(int stage)
@@ -60,17 +55,12 @@ void Patient::DoStart()
 		{
 			vrRand = new DengueVirus();
 		}
-		//vrRand = vrRand->DoBorn();
 		m_virusList->push_back(vrRand);
 	}
-	
-	//std::cout << m_virusList.size();
 }
 
 void Patient::TakeMedicine(int medicin_resistance)
 {
-	//	std::vector<Virus*>::iterator pos = m_virusList->begin();
-	//std::vector<Virus*> *tempDie = new std::vector<Virus*>();
 	ReduceVirus(medicin_resistance);
 
 	if (m_virusList->size() != 0)
@@ -94,6 +84,7 @@ void Patient::TakeMedicine(std::string key, int medicin_resistance)
 	{
 		if (m_virusList->at(i)->ReduceResistance(medicin_resistance))
 		{
+			delete m_virusList->at(i);
 			m_virusList->erase(m_virusList->begin() + i);
 			//delete m_virusList->at(i);
 		}
@@ -143,7 +134,11 @@ int Patient::GetStage()
 
 void Patient::DoDie()
 {
-	delete m_virusList;
+	for each (auto var in *m_virusList)
+	{
+		var->DoDie();
+	}
+//	delete m_virusList;
 	//m_virusList->clear();
 	this->m_stage = 0;
 	//delete m_virusList;

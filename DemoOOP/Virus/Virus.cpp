@@ -5,6 +5,7 @@
 #include <string.h>
 #include <cstring>
 #include <algorithm>
+#include <cstring>
 
 using namespace std;
 
@@ -23,14 +24,18 @@ Virus::Virus(int m_resistance)
 Virus::Virus(const Virus *vr)
 {
 	this->m_resistance = vr->m_resistance;
-	this->m_dna = vr->m_dna;
+	this->m_dna = new char[strlen(vr->m_dna)];
+	for (int i = 0; i < strlen(vr->m_dna); i++)
+	{
+		this->m_dna[i] = vr->m_dna[i];
+	}
+	//this->m_dna[strlen(vr->m_dna)]='\0';
 }
 
 
 Virus::~Virus()
 {
-	//delete m_dna;
-	//std::cout << "destroy virus\n";
+	delete m_dna;	
 }
 
 void Virus::LoadDNAInformation()
